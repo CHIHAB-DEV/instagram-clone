@@ -50,27 +50,27 @@ class FeedsScreen extends StatelessWidget {
                   //     ),
                   //   ),
                   // ),
-
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    height: 125,
-                    width: double.infinity,
-                    child: ListView.separated(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return buildStoryItem(
-                          context,
-                          SocialCubit.get(context).users[index],
-                          SocialCubit.get(context).userModel,
-                        );
-                      },
-                      separatorBuilder: (context, index) => SizedBox(
-                        width: 5.0,
+                  if (SocialCubit.get(context).userModel!.name == 'Chihab 🫶🏻')
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      height: 125,
+                      width: double.infinity,
+                      child: ListView.separated(
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return buildStoryItem(
+                            context,
+                            SocialCubit.get(context).users[index],
+                            SocialCubit.get(context).userModel,
+                          );
+                        },
+                        separatorBuilder: (context, index) => SizedBox(
+                          width: 5.0,
+                        ),
+                        itemCount: SocialCubit.get(context).users.length,
                       ),
-                      itemCount: SocialCubit.get(context).users.length,
                     ),
-                  ),
 
                   // Card(
                   //   clipBehavior: Clip.antiAliasWithSaveLayer,

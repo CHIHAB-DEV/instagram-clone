@@ -86,6 +86,7 @@ class SocialLoginScreen extends StatelessWidget {
                           height: 25.0,
                         ),
                         defaultFormField(
+                          context,
                           label: 'Email Address',
                           prefixIcon: Icons.mail_outline,
                           controller: emailcontroller,
@@ -99,7 +100,7 @@ class SocialLoginScreen extends StatelessWidget {
                         const SizedBox(
                           height: 25.0,
                         ),
-                        defaultFormField(
+                        defaultFormField(context,
                             label: 'Password',
                             prefixIcon: Icons.lock,
                             controller: passwordcontroller,

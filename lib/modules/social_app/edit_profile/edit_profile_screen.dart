@@ -206,6 +206,7 @@ class EditProfielScreen extends StatelessWidget {
                     height: 25.0,
                   ),
                   defaultFormField(
+                    context,
                     label: 'name',
                     prefixIcon: IconBroken.Profile,
                     controller: nameController,
@@ -221,6 +222,7 @@ class EditProfielScreen extends StatelessWidget {
                     height: 15.0,
                   ),
                   defaultFormField(
+                    context,
                     label: 'bio',
                     prefixIcon: IconBroken.Info_Square,
                     controller: bioController,
@@ -236,6 +238,7 @@ class EditProfielScreen extends StatelessWidget {
                     height: 15.0,
                   ),
                   defaultFormField(
+                    context,
                     label: 'phone',
                     prefixIcon: IconBroken.Call,
                     controller: phoneController,

@@ -516,7 +516,7 @@ class SocialCubit extends Cubit<SocialStates> {
     });
   }
 
-  bool isDark = false;
+  bool isDark = true;
   IconData? themeIcon = Icons.brightness_4_outlined;
 
   void changeTheme({bool? fromShared}) {

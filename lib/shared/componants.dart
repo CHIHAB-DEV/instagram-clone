@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:social_media_app/layout/social_app/cubit/cubit.dart';
 import 'package:social_media_app/shared/styles/icon_broken.dart';
 
 const defaultColor = Colors.cyan;
@@ -66,7 +67,7 @@ ThemeData darkTheme = ThemeData(
   ),
   fontFamily: 'TaiHeritagePro',
   primarySwatch: defaultColor,
-  scaffoldBackgroundColor: Colors.black,
+  scaffoldBackgroundColor: const Color(0xFF121212),
   appBarTheme: AppBarTheme(
     titleSpacing: 20.0,
     backwardsCompatibility: false,
@@ -74,7 +75,7 @@ ThemeData darkTheme = ThemeData(
       statusBarColor: HexColor('333739'),
       statusBarIconBrightness: Brightness.light,
     ),
-    backgroundColor: Colors.black54,
+    backgroundColor: const Color(0xFF121212),
     elevation: 0.0,
     titleTextStyle: const TextStyle(
       color: Colors.white,
@@ -91,7 +92,7 @@ ThemeData darkTheme = ThemeData(
     selectedItemColor: defaultColor,
     unselectedItemColor: Colors.white,
     elevation: 20.0,
-    backgroundColor: Colors.black54,
+    backgroundColor: Color(0xFF121212),
   ),
 );
 
@@ -202,7 +203,7 @@ Widget defaultButton({
       ),
     );
 
-Widget defaultFormField(
+Widget defaultFormField(context,
         {required String label,
         required IconData prefixIcon,
         IconData? suffixIcon,
@@ -221,7 +222,7 @@ Widget defaultFormField(
       enabled: isClickable,
       onTap: onTap,
       controller: controller,
-      style: ThemeData == ThemeMode.light
+      style: Theme.of(context).scaffoldBackgroundColor == Colors.white
           ? TextStyle(fontSize: 20, color: Colors.black)
           : TextStyle(fontSize: 20, color: Colors.white),
       obscureText: isPassword,
@@ -232,27 +233,29 @@ Widget defaultFormField(
       validator: validate,
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: ThemeData == ThemeMode.light
+        labelStyle: Theme.of(context).scaffoldBackgroundColor == Colors.white
             ? TextStyle(fontSize: 20, color: Colors.black)
             : TextStyle(fontSize: 20, color: Colors.white),
-        // hintText: 'Email address',
         prefixIcon: Icon(
           prefixIcon,
-          color: ThemeData == ThemeMode.light ? Colors.black : Colors.white,
+          color: Theme.of(context).scaffoldBackgroundColor == Colors.white
+              ? Colors.black
+              : Colors.white,
         ),
-
         suffixIcon: suffixIcon != null
             ? IconButton(
-                icon: Icon(suffixIcon,
-                    color: ThemeData == ThemeMode.light
-                        ? Colors.black
-                        : Colors.white),
+                icon: Icon(
+                  suffixIcon,
+                  color:
+                      Theme.of(context).scaffoldBackgroundColor == Colors.white
+                          ? Colors.black
+                          : Colors.white,
+                ),
                 onPressed: () {
                   suffixPressed!();
                 },
               )
             : null,
-
         border: const OutlineInputBorder(),
       ),
     );

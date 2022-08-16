@@ -70,6 +70,7 @@ class SocialRegisterScreen extends StatelessWidget {
                           height: 25.0,
                         ),
                         defaultFormField(
+                          context,
                           label: 'Full Name',
                           prefixIcon: Icons.person,
                           controller: namecontroller,
@@ -84,6 +85,7 @@ class SocialRegisterScreen extends StatelessWidget {
                           height: 25.0,
                         ),
                         defaultFormField(
+                          context,
                           label: 'Email Address',
                           prefixIcon: Icons.mail_outline,
                           controller: emailcontroller,
@@ -97,7 +99,7 @@ class SocialRegisterScreen extends StatelessWidget {
                         const SizedBox(
                           height: 25.0,
                         ),
-                        defaultFormField(
+                        defaultFormField(context,
                             label: 'Password',
                             prefixIcon: Icons.lock,
                             controller: passwordcontroller,
@@ -119,6 +121,7 @@ class SocialRegisterScreen extends StatelessWidget {
                           height: 25.0,
                         ),
                         defaultFormField(
+                          context,
                           label: 'Phone Number',
                           prefixIcon: Icons.phone,
                           controller: phonecontroller,

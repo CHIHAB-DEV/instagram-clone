@@ -321,7 +321,7 @@ class ChatDetailsScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: Theme.of(context).scaffoldBackgroundColor == Colors.black
                 ? Colors.white
-                : Colors.black,
+                : Colors.grey[300],
             borderRadius: const BorderRadiusDirectional.only(
               topStart: Radius.circular(10),
               topEnd: Radius.circular(10),
@@ -333,15 +333,15 @@ class ChatDetailsScreen extends StatelessWidget {
             style: TextStyle(
               fontSize: 17.0,
               color: Theme.of(context).scaffoldBackgroundColor == Colors.black
-                  ? Colors.black
-                  : Colors.white,
+                  ? Colors.white
+                  : Colors.black,
             ),
           ),
         ),
       );
 
   Widget buildImageMessage(messageModel model, context) => Align(
-        alignment: AlignmentDirectional.centerEnd,
+        alignment: AlignmentDirectional.centerStart,
         child: Container(
           height: 250,
           width: 250,

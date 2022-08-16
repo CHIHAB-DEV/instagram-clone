@@ -114,10 +114,18 @@ class NewPostScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: TextFormField(
+                    style: Theme.of(context).scaffoldBackgroundColor ==
+                            Colors.white
+                        ? TextStyle(fontSize: 20, color: Colors.black)
+                        : TextStyle(fontSize: 20, color: Colors.white),
                     controller: textController,
                     maxLines: 10,
                     decoration: InputDecoration(
                       hintText: 'what\'s on your mind , ${userModel.name} ?',
+                      hintStyle: Theme.of(context).scaffoldBackgroundColor ==
+                              Colors.white
+                          ? TextStyle(color: Colors.black)
+                          : TextStyle(color: Colors.white),
                       border: InputBorder.none,
                     ),
                   ),
