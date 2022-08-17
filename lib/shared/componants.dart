@@ -45,7 +45,7 @@ void navigateAndfinish(context, widget) {
 }
 
 ThemeData darkTheme = ThemeData(
-  iconTheme: IconThemeData(
+  iconTheme: const IconThemeData(
     color: Colors.white,
   ),
   textTheme: const TextTheme(
@@ -97,7 +97,7 @@ ThemeData darkTheme = ThemeData(
 );
 
 ThemeData lightTheme = ThemeData(
-  iconTheme: IconThemeData(
+  iconTheme: const IconThemeData(
     color: Colors.black,
   ),
   textTheme: const TextTheme(
@@ -223,8 +223,8 @@ Widget defaultFormField(context,
       onTap: onTap,
       controller: controller,
       style: Theme.of(context).scaffoldBackgroundColor == Colors.white
-          ? TextStyle(fontSize: 20, color: Colors.black)
-          : TextStyle(fontSize: 20, color: Colors.white),
+          ? const TextStyle(fontSize: 20, color: Colors.black)
+          : const TextStyle(fontSize: 20, color: Colors.white),
       obscureText: isPassword,
       keyboardType: TextInputType.emailAddress,
       onFieldSubmitted: (String? s) {
@@ -234,14 +234,20 @@ Widget defaultFormField(context,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: Colors.grey,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: defaultColor,
           ),
         ),
         labelText: label,
         labelStyle: Theme.of(context).scaffoldBackgroundColor == Colors.white
-            ? TextStyle(fontSize: 20, color: Colors.black)
-            : TextStyle(fontSize: 20, color: Colors.white),
+            ? const TextStyle(fontSize: 20, color: Colors.black)
+            : const TextStyle(fontSize: 20, color: Colors.white),
         prefixIcon: Icon(
           prefixIcon,
           color: Theme.of(context).scaffoldBackgroundColor == Colors.white

@@ -26,10 +26,12 @@ class FeedsScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: ((context, state) {
         return ConditionalBuilder(
-          condition: SocialCubit.get(context).posts.isNotEmpty &&
-              SocialCubit.get(context).userModel?.image != null &&
-              // SocialCubit.get(context).userModel?.uId != null &&
-              SocialCubit.get(context).users.isNotEmpty,
+          condition: SocialCubit.get(context).posts.isNotEmpty,
+          // SocialCubit.get(context).userModel?.image != null &&
+          // SocialCubit.get(context).users.isNotEmpty
+
+          // SocialCubit.get(context).userModel?.uId != null &&
+
           builder: ((context) {
             return SingleChildScrollView(
               physics: BouncingScrollPhysics(),
@@ -76,8 +78,11 @@ class FeedsScreen extends StatelessWidget {
                   //   height: 0,
                   // ),
                   Padding(
-                    padding: const EdgeInsets.all(
-                      5.0,
+                    padding: const EdgeInsetsDirectional.only(
+                      top: 5.0,
+                      start: 4.0,
+                      end: 4.0,
+                      bottom: 10,
                     ),
                     child: InkWell(
                       onTap: (() {
@@ -93,7 +98,12 @@ class FeedsScreen extends StatelessWidget {
                             color: Theme.of(context).scaffoldBackgroundColor,
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding: const EdgeInsetsDirectional.only(
+                              start: 5,
+                              top: 15,
+                              bottom: 15,
+                              end: 5,
+                            ),
                             child: Row(
                               children: [
                                 CircleAvatar(
@@ -108,16 +118,17 @@ class FeedsScreen extends StatelessWidget {
                                 Expanded(
                                   child: Container(
                                     height: 50,
-                                    alignment: AlignmentDirectional.centerStart,
+                                    // alignment: AlignmentDirectional.centerStart,
                                     child: TextFormField(
                                       style: Theme.of(context)
                                                   .scaffoldBackgroundColor ==
                                               Colors.white
                                           ? TextStyle(
-                                              fontSize: 16, color: Colors.black)
+                                              fontSize: 17, color: Colors.black)
                                           : TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.white),
+                                              fontSize: 17,
+                                              color: Colors.white,
+                                            ),
                                       maxLines: 1,
                                       decoration: InputDecoration(
                                         enabledBorder: OutlineInputBorder(
@@ -138,8 +149,14 @@ class FeedsScreen extends StatelessWidget {
                                         hintStyle: Theme.of(context)
                                                     .scaffoldBackgroundColor ==
                                                 Colors.white
-                                            ? TextStyle(color: Colors.black)
-                                            : TextStyle(color: Colors.white),
+                                            ? TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 17,
+                                              )
+                                            : TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 17,
+                                              ),
                                         border: InputBorder.none,
                                       ),
                                     ),
