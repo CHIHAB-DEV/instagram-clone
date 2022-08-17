@@ -30,10 +30,19 @@ class ChatsScreen extends StatelessWidget {
               );
             },
             separatorBuilder: (context, index) {
-              return Container(
-                width: double.infinity,
-                height: 1.0,
-                color: Colors.grey[300],
+              return Padding(
+                padding: const EdgeInsetsDirectional.only(
+                  start: 15,
+                  end: 15,
+                ),
+                child: Container(
+                  width: double.infinity,
+                  height: 1.0,
+                  color:
+                      Theme.of(context).scaffoldBackgroundColor == Colors.white
+                          ? Colors.grey[300]
+                          : Colors.grey[800],
+                ),
               );
             },
             itemCount: SocialCubit.get(context).users.length,
@@ -107,9 +116,12 @@ class ChatsScreen extends StatelessWidget {
               Spacer(),
               IconButton(
                 onPressed: () {},
-                icon: const Icon(
+                icon: Icon(
                   IconBroken.Camera,
-                  color: Colors.black,
+                  color:
+                      Theme.of(context).scaffoldBackgroundColor == Colors.white
+                          ? Colors.black
+                          : Colors.white,
                 ),
               ),
             ],

@@ -232,6 +232,12 @@ Widget defaultFormField(context,
       },
       validator: validate,
       decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: Colors.grey,
+          ),
+        ),
         labelText: label,
         labelStyle: Theme.of(context).scaffoldBackgroundColor == Colors.white
             ? TextStyle(fontSize: 20, color: Colors.black)

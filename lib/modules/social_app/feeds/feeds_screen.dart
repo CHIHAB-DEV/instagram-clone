@@ -13,6 +13,7 @@ import 'package:social_media_app/layout/social_app/cubit/cubit.dart';
 import 'package:social_media_app/layout/social_app/cubit/states.dart';
 import 'package:social_media_app/models/post_model.dart';
 import 'package:social_media_app/models/social_user_model.dart';
+import 'package:social_media_app/modules/social_app/new_post/new_post_screen.dart';
 import 'package:social_media_app/shared/componants.dart';
 import 'package:social_media_app/shared/styles/icon_broken.dart';
 
@@ -71,7 +72,124 @@ class FeedsScreen extends StatelessWidget {
                         itemCount: SocialCubit.get(context).users.length,
                       ),
                     ),
+                  // SizedBox(
+                  //   height: 0,
+                  // ),
+                  Padding(
+                    padding: const EdgeInsets.all(
+                      5.0,
+                    ),
+                    child: InkWell(
+                      onTap: (() {
+                        navigatorTo(context, NewPostScreen());
+                      }),
+                      child: Card(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        elevation: 5.0,
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 23,
+                                  backgroundImage: NetworkImage(
+                                    SocialCubit.get(context).userModel!.image!,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    height: 50,
+                                    alignment: AlignmentDirectional.centerStart,
+                                    child: TextFormField(
+                                      style: Theme.of(context)
+                                                  .scaffoldBackgroundColor ==
+                                              Colors.white
+                                          ? TextStyle(
+                                              fontSize: 16, color: Colors.black)
+                                          : TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.white),
+                                      maxLines: 1,
+                                      decoration: InputDecoration(
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                          borderSide: BorderSide(
+                                            // width: 3,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                          borderSide:
+                                              BorderSide(color: Colors.grey),
+                                        ),
+                                        hintText: ' what\'s on your mind?',
+                                        hintStyle: Theme.of(context)
+                                                    .scaffoldBackgroundColor ==
+                                                Colors.white
+                                            ? TextStyle(color: Colors.black)
+                                            : TextStyle(color: Colors.white),
+                                        border: InputBorder.none,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    navigatorTo(context, NewPostScreen());
+                                  },
+                                  icon: Icon(
+                                    IconBroken.Image_2,
+                                    size: 30,
+                                  ),
+                                ),
 
+                                // Container(
+                                //   height: 40,
+                                //   width: 300,
+                                //   decoration: BoxDecoration(
+                                //       borderRadius: BorderRadius.circular(20),
+                                //       color: Theme.of(context)
+                                //           .scaffoldBackgroundColor),
+                                //   // ignore: sort_child_properties_last
+                                //   child: Padding(
+                                //     padding:
+                                //         EdgeInsetsDirectional.only(start: 15.0),
+                                //     child: Text(
+                                //       'What\'s on your mind?',
+                                //       style: TextStyle(
+                                //         fontSize: 15,
+                                //         color: Theme.of(context)
+                                //                     .scaffoldBackgroundColor ==
+                                //                 Colors.white
+                                //             ? Colors.black
+                                //             : Colors.white,
+                                //       ),
+                                //     ),
+                                //   ),
+                                //   alignment: AlignmentDirectional.centerStart,
+                                // )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                   // Card(
                   //   clipBehavior: Clip.antiAliasWithSaveLayer,
                   //   elevation: 6.0,
@@ -613,7 +731,7 @@ class FeedsScreen extends StatelessWidget {
                           width: 7,
                         ),
                         Text(
-                          '❤️‍🔥',
+                          '🇩🇿',
                           style: TextStyle(
                             fontSize: 22.0,
                           ),
