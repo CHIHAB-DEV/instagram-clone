@@ -18,7 +18,12 @@ import 'package:social_media_app/shared/componants.dart';
 import 'package:social_media_app/shared/styles/icon_broken.dart';
 
 class FeedsScreen extends StatelessWidget {
-  const FeedsScreen({Key? key}) : super(key: key);
+  // final keyRefresh = GlobalKey<RefreshIndicatorState>();
+  Future<void> refresh() {
+    return Future.delayed(
+      Duration(seconds: 1),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,234 +31,248 @@ class FeedsScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: ((context, state) {
         return ConditionalBuilder(
-          condition: SocialCubit.get(context).posts.isNotEmpty,
-          // SocialCubit.get(context).userModel?.image != null &&
-          // SocialCubit.get(context).users.isNotEmpty
-
+          condition: SocialCubit.get(context).posts.isNotEmpty &&
+              SocialCubit.get(context).userModel?.image != null &&
+              SocialCubit.get(context).users.isNotEmpty,
           // SocialCubit.get(context).userModel?.uId != null &&
 
           builder: ((context) {
-            return SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  // Padding(
-                  //   padding: const EdgeInsetsDirectional.only(
-                  //     bottom: 10.0,
-                  //     start: 10.0,
-                  //     end: 10.0,
-                  //   ),
-                  //   child: Container(
-                  //     width: double.infinity,
-                  //     height: 100,
-                  //     child: Row(
-                  //       children: [
-                  //         buildMyStory(context),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  if (SocialCubit.get(context).userModel!.name == 'Chihab 🫶🏻')
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      height: 125,
-                      width: double.infinity,
-                      child: ListView.separated(
-                        physics: const BouncingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return buildStoryItem(
-                            context,
-                            SocialCubit.get(context).users[index],
-                            SocialCubit.get(context).userModel,
-                          );
-                        },
-                        separatorBuilder: (context, index) => SizedBox(
-                          width: 5.0,
-                        ),
-                        itemCount: SocialCubit.get(context).users.length,
-                      ),
-                    ),
-                  // SizedBox(
-                  //   height: 0,
-                  // ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(
-                      top: 5.0,
-                      start: 4.0,
-                      end: 4.0,
-                      bottom: 10,
-                    ),
-                    child: InkWell(
-                      onTap: (() {
-                        navigatorTo(context, NewPostScreen());
-                      }),
-                      child: Card(
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                        elevation: 5.0,
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Theme.of(context).scaffoldBackgroundColor,
+            return RefreshIndicator(
+              onRefresh: () async {
+                SocialCubit.get(context).getPosts();
+              },
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    // Padding(
+                    //   padding: const EdgeInsetsDirectional.only(
+                    //     bottom: 10.0,
+                    //     start: 10.0,
+                    //     end: 10.0,
+                    //   ),
+                    //   child: Container(
+                    //     width: double.infinity,
+                    //     height: 100,
+                    //     child: Row(
+                    //       children: [
+                    //         buildMyStory(context),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+                    if (SocialCubit.get(context).userModel!.name ==
+                        'Chihab 🫶🏻')
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        height: 125,
+                        width: double.infinity,
+                        child: ListView.separated(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return buildStoryItem(
+                              context,
+                              SocialCubit.get(context).users[index],
+                              SocialCubit.get(context).userModel,
+                            );
+                          },
+                          separatorBuilder: (context, index) => SizedBox(
+                            width: 5.0,
                           ),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.only(
-                              start: 5,
-                              top: 15,
-                              bottom: 15,
-                              end: 5,
+                          itemCount: SocialCubit.get(context).users.length,
+                        ),
+                      ),
+                    // SizedBox(
+                    //   height: 0,
+                    // ),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(
+                        top: 5.0,
+                        start: 4.0,
+                        end: 4.0,
+                        bottom: 10,
+                      ),
+                      child: InkWell(
+                        onTap: (() {
+                          navigatorTo(context, NewPostScreen());
+                        }),
+                        child: Card(
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          elevation: 5.0,
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Theme.of(context).scaffoldBackgroundColor,
                             ),
-                            child: Row(
-                              children: [
-                                CircleAvatar(
-                                  radius: 23,
-                                  backgroundImage: NetworkImage(
-                                    SocialCubit.get(context).userModel!.image!,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    height: 50,
-                                    // alignment: AlignmentDirectional.centerStart,
-                                    child: TextFormField(
-                                      style: Theme.of(context)
-                                                  .scaffoldBackgroundColor ==
-                                              Colors.white
-                                          ? TextStyle(
-                                              fontSize: 17, color: Colors.black)
-                                          : TextStyle(
-                                              fontSize: 17,
-                                              color: Colors.white,
-                                            ),
-                                      maxLines: 1,
-                                      decoration: InputDecoration(
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(25),
-                                          borderSide: BorderSide(
-                                            // width: 3,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(25),
-                                          borderSide:
-                                              BorderSide(color: Colors.grey),
-                                        ),
-                                        hintText: ' what\'s on your mind?',
-                                        hintStyle: Theme.of(context)
-                                                    .scaffoldBackgroundColor ==
-                                                Colors.white
-                                            ? TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 17,
-                                              )
-                                            : TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 17,
-                                              ),
-                                        border: InputBorder.none,
-                                      ),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.only(
+                                start: 5,
+                                top: 15,
+                                bottom: 15,
+                                end: 5,
+                              ),
+                              child: Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 23,
+                                    backgroundImage: NetworkImage(
+                                      SocialCubit.get(context)
+                                          .userModel!
+                                          .image!,
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    navigatorTo(context, NewPostScreen());
-                                  },
-                                  icon: Icon(
-                                    IconBroken.Image_2,
-                                    size: 30,
+                                  SizedBox(
+                                    width: 10,
                                   ),
-                                ),
+                                  Expanded(
+                                    child: Container(
+                                        height: 45,
+                                        alignment:
+                                            AlignmentDirectional.centerStart,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: Colors.grey,
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: Theme.of(context)
+                                                  .scaffoldBackgroundColor),
+                                          // ignore: sort_child_properties_last
+                                          child: Padding(
+                                            padding: EdgeInsetsDirectional.only(
+                                                start: 15.0),
+                                            child: Text(
+                                              'What\'s on your mind?',
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: Theme.of(context)
+                                                            .scaffoldBackgroundColor ==
+                                                        Colors.white
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                          alignment:
+                                              AlignmentDirectional.centerStart,
+                                        )
 
-                                // Container(
-                                //   height: 40,
-                                //   width: 300,
-                                //   decoration: BoxDecoration(
-                                //       borderRadius: BorderRadius.circular(20),
-                                //       color: Theme.of(context)
-                                //           .scaffoldBackgroundColor),
-                                //   // ignore: sort_child_properties_last
-                                //   child: Padding(
-                                //     padding:
-                                //         EdgeInsetsDirectional.only(start: 15.0),
-                                //     child: Text(
-                                //       'What\'s on your mind?',
-                                //       style: TextStyle(
-                                //         fontSize: 15,
-                                //         color: Theme.of(context)
-                                //                     .scaffoldBackgroundColor ==
-                                //                 Colors.white
-                                //             ? Colors.black
-                                //             : Colors.white,
-                                //       ),
-                                //     ),
-                                //   ),
-                                //   alignment: AlignmentDirectional.centerStart,
-                                // )
-                              ],
+                                        // TextFormField(
+                                        //   style: Theme.of(context)
+                                        //               .scaffoldBackgroundColor ==
+                                        //           Colors.white
+                                        //       ? TextStyle(
+                                        //           fontSize: 17,
+                                        //           color: Colors.black)
+                                        //       : TextStyle(
+                                        //           fontSize: 17,
+                                        //           color: Colors.white,
+                                        //         ),
+                                        //   maxLines: 1,
+                                        //   decoration: InputDecoration(
+                                        //     enabledBorder: OutlineInputBorder(
+                                        //       borderRadius:
+                                        //           BorderRadius.circular(25),
+                                        //       borderSide: BorderSide(
+                                        //         // width: 3,
+                                        //         color: Colors.grey,
+                                        //       ),
+                                        //     ),
+                                        //     focusedBorder: OutlineInputBorder(
+                                        //       borderRadius:
+                                        //           BorderRadius.circular(25),
+                                        //       borderSide:
+                                        //           BorderSide(color: Colors.grey),
+                                        //     ),
+                                        //     hintText: ' what\'s on your mind?',
+                                        //     hintStyle: Theme.of(context)
+                                        //                 .scaffoldBackgroundColor ==
+                                        //             Colors.white
+                                        //         ? TextStyle(
+                                        //             color: Colors.black,
+                                        //             fontSize: 17,
+                                        //           )
+                                        //         : TextStyle(
+                                        //             color: Colors.white,
+                                        //             fontSize: 17,
+                                        //           ),
+                                        //     border: InputBorder.none,
+                                        //   ),
+                                        // ),
+
+                                        ),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      navigatorTo(context, NewPostScreen());
+                                    },
+                                    icon: Icon(
+                                      IconBroken.Image_2,
+                                      size: 30,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  // Card(
-                  //   clipBehavior: Clip.antiAliasWithSaveLayer,
-                  //   elevation: 6.0,
-                  //   margin: EdgeInsets.all(8.0),
-                  //   child: Stack(
-                  //     alignment: AlignmentDirectional.centerEnd,
-                  //     children: const [
-                  //       Image(
-                  //         image: NetworkImage(
-                  //           'https://img.freepik.com/free-photo/stunned-man-looks-with-great-surprisement-fear-aside-opens-mouth-widely-wears-hat-round-glasses_273609-38441.jpg?t=st=1658624732~exp=1658625332~hmac=e13be5cfc557d01f25763770f510d1675a2e0084d51db917e8476745bc6141f5&w=2000',
-                  //         ),
-                  //         fit: BoxFit.cover,
-                  //         height: 200.0,
-                  //         width: double.infinity,
-                  //       ),
-                  //       Padding(
-                  //         padding: EdgeInsets.all(8.0),
-                  //         child: Text(
-                  //           textAlign: TextAlign.center,
-                  //           'communicate with \nfriends',
-                  //           style: TextStyle(
-                  //             color: Colors.white,
-                  //             fontSize: 20,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
+                    // Card(
+                    //   clipBehavior: Clip.antiAliasWithSaveLayer,
+                    //   elevation: 6.0,
+                    //   margin: EdgeInsets.all(8.0),
+                    //   child: Stack(
+                    //     alignment: AlignmentDirectional.centerEnd,
+                    //     children: const [
+                    //       Image(
+                    //         image: NetworkImage(
+                    //           'https://img.freepik.com/free-photo/stunned-man-looks-with-great-surprisement-fear-aside-opens-mouth-widely-wears-hat-round-glasses_273609-38441.jpg?t=st=1658624732~exp=1658625332~hmac=e13be5cfc557d01f25763770f510d1675a2e0084d51db917e8476745bc6141f5&w=2000',
+                    //         ),
+                    //         fit: BoxFit.cover,
+                    //         height: 200.0,
+                    //         width: double.infinity,
+                    //       ),
+                    //       Padding(
+                    //         padding: EdgeInsets.all(8.0),
+                    //         child: Text(
+                    //           textAlign: TextAlign.center,
+                    //           'communicate with \nfriends',
+                    //           style: TextStyle(
+                    //             color: Colors.white,
+                    //             fontSize: 20,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
 
-                  ListView.separated(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => buildPostItem(
-                      SocialCubit.get(context).posts[index],
-                      context,
-                      index,
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) => buildPostItem(
+                        SocialCubit.get(context).posts[index],
+                        context,
+                        index,
+                      ),
+                      itemCount: SocialCubit.get(context).posts.length,
+                      separatorBuilder: (context, index) => SizedBox(
+                        height: 10,
+                      ),
                     ),
-                    itemCount: SocialCubit.get(context).posts.length,
-                    separatorBuilder: (context, index) => SizedBox(
+                    SizedBox(
                       height: 10,
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           }),

@@ -315,6 +315,8 @@ class SocialCubit extends Cubit<SocialStates> {
   List<int> comments = [];
   List<bool> isLiked = [];
   void getPosts() {
+    posts = [];
+    emit(SocialGetLastImageMessageSuccessState());
     FirebaseFirestore.instance
         .collection('posts')
         .orderBy("dateTime")

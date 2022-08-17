@@ -8,7 +8,9 @@ import 'package:social_media_app/layout/social_app/cubit/cubit.dart';
 import 'package:social_media_app/layout/social_app/cubit/states.dart';
 import 'package:social_media_app/modules/social_app/edit_profile/edit_profile_screen.dart';
 import 'package:social_media_app/modules/social_app/new_post/new_post_screen.dart';
+import 'package:social_media_app/modules/social_app/social_login/social_login_screen.dart';
 import 'package:social_media_app/shared/componants.dart';
+import 'package:social_media_app/shared/constans.dart';
 import 'package:social_media_app/shared/styles/icon_broken.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -265,6 +267,24 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              const Spacer(),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(
+                    color: Colors.grey,
+                    width: 0.5,
+                  ),
+                ),
+                onPressed: () {
+                  singOut(context);
+                },
+                child: const Text(
+                  'Log Out',
+                  style: TextStyle(
+                    color: Colors.red,
+                  ),
+                ),
               ),
             ],
           ),
